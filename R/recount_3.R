@@ -36,3 +36,5 @@ rse_gene_SRP009615 <- create_rse(proj_info)
 
 # Explore RSE
 rse_gene_SRP009615
+
+save(rse_gene_SRP009615, file = 'rse_gene_SRP009615.RData')
