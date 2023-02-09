@@ -37,4 +37,8 @@ rse_gene_SRP009615 <- create_rse(proj_info)
 # Explore RSE
 rse_gene_SRP009615
 
+#Scale coverage counts
+assay(rse_gene_SRP009615) <- compute_read_counts(rse_gene_SRP009615)
+
+# Save the scaled rse
 save(rse_gene_SRP009615, file = 'rse_gene_SRP009615.RData')
