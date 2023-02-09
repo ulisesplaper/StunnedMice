@@ -41,4 +41,4 @@ rse_gene_SRP009615
 assay(rse_gene_SRP009615) <- compute_read_counts(rse_gene_SRP009615)
 
 # Save the scaled rse
-save(rse_gene_SRP009615, file = 'rse_gene_SRP009615.RData')
+save(rse_gene_SRP009615, file = 'data/rse_gene_SRP009615.RData')
