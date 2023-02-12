@@ -32,8 +32,9 @@ cowplot::plot_grid(plotlist = vd$plotlist)
 
 
 # Generate matrix for all pairwise comparisons
-contrasts <- makeContrasts(Dex24h-Control24h, Dex24h-Dex12h,Dex24h-Noise, Dex12h-Control12h,
+contrastMatrix <- makeContrasts(Dex24h-Control24h, Dex24h-Dex12h,Dex24h-Noise, Dex12h-Control12h,
                            Dex12h-Noise, Noise-Baseline, levels = rse_gene_SRP009615$sra_attribute.isolate)
-
+# Save the design matrix as Rdata file
+save(contrastMatrix, file = 'data/contrastMatrix.RData')
 
 
