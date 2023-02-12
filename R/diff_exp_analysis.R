@@ -2,8 +2,11 @@
 library('edgeR')
 # Load the rse
 load('data/rse_gene_SRP081192.RData')
+# Expand sra satributes
+rse_gene_SRP081192 <- expand_sra_attributes(rse_gene_SRP081192)
 
-
+# Assign groups isolate to a new column in colData
+rse_gene_SRP081192$sample <- factor(rse_gene_SRP081192$sra_attribute.isolate)
 
 # Make control quality assessment of samples
 
@@ -22,12 +25,12 @@ summary(gene_means)
 #0.0      0.0      1.8    427.0    170.5 444796.5
 
 # Eliminate genes
-rse_gene_SRP081192_filtered <- rse_gene_SRP081192[gene_means>0.1,]
+rse_gene_SRP081192_unfiltered <- rse_gene_SRP081192
+rse_gene_SRP081192 <- rse_gene_SRP081192_unfiltered[gene_means>0.1,]
 
 # Calculate number of genes filtered
-round(nrow(rse_gene_SRP081192_filtered)/nrow(rse_gene_SRP081192)*100, 2)
+round(nrow(rse_gene_SRP081192)/nrow(rse_gene_SRP081192_unfiltered)*100, 2)
 # 68.96
-
 
 
 
