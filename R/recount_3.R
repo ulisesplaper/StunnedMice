@@ -22,7 +22,6 @@ getOption(
 
 ## Check mouse projects
 mouse_projects <- available_projects(organism = 'mouse')
-mouse_projects
 
 ## Find project of interest
 proj_info <- subset(
@@ -32,13 +31,14 @@ proj_info <- subset(
 ## Create RangedSummarizedExperiment (RSE) object
 ## with project info
 ## con la información a nivel de genes
-rse_gene_SRP009615 <- create_rse(proj_info)
+rse_gene_SRP081192 <- create_rse(proj_info)
 
 # Explore RSE
-rse_gene_SRP009615
+rse_gene_SRP081192
 
 #Scale coverage counts
-assay(rse_gene_SRP009615) <- compute_read_counts(rse_gene_SRP009615)
+
+assay(rse_gene_SRP081192, "counts") <- compute_read_counts(rse_gene_SRP009615)
 
 # Save the scaled rse
-save(rse_gene_SRP009615, file = 'data/rse_gene_SRP009615.RData')
+save(rse_gene_SRP081192, file = 'data/rse_gene_SRP081192.RData')
