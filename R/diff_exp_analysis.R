@@ -50,4 +50,20 @@ ggplot(as.data.frame(colData(rse_gene_SRP081192)), aes(y = assigned_gene_prop, x
   xlab("Group")
 
 
+## Design statistics model
+rse_gene_SRP081192$sample
 
+rse_gene_SRP081192$sample
+
+mod <- model.matrix(~0+sample + assigned_gene_prop, data = colData(rse_gene_SRP081192))
+colnames(mod)
+mod
+contrasts <- makeContrasts(
+  sampleDex24h-sampleControl24h, sampleDex24h-sampleDex12h,
+  sampleDex24h-sampleNoise, sampleDex12h-sampleControl12h,
+  sampleDex12h-sampleNoise, sampleNoise-sampleBaseline,
+  levels=colnames(mod))
+colnames(contrasts) <- abbreviate(colnames(contrasts))
+contrasts
+
+vGene <- voom(dge, contrasts, plot = TRUE)
