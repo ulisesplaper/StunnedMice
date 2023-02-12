@@ -1,5 +1,6 @@
 # Load requiered packages
 library('edgeR')
+library("ggplot2")
 # Load the rse
 load('data/rse_gene_SRP081192.RData')
 # Expand sra satributes
@@ -31,6 +32,22 @@ rse_gene_SRP081192 <- rse_gene_SRP081192_unfiltered[gene_means>0.1,]
 # Calculate number of genes filtered
 round(nrow(rse_gene_SRP081192)/nrow(rse_gene_SRP081192_unfiltered)*100, 2)
 # 68.96
+
+
+# Normalize data
+dge <- DGEList(
+  counts = assay(rse_gene_SRP081192, "counts"),
+  genes = rowData(rse_gene_SRP081192)
+)
+dge <- calcNormFactors(dge)
+
+# Check the plot of assigned gene proportion of counts
+
+ggplot(as.data.frame(colData(rse_gene_SRP081192)), aes(y = assigned_gene_prop, x = sample)) +
+  geom_boxplot() +
+  theme_bw(base_size = 20) +
+  ylab("Assigned Gene Prop") +
+  xlab("Group")
 
 
 
